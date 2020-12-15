@@ -1,0 +1,54 @@
+#navbar {
+  nav {
+    position: fixed; /* Make it stick/fixed */
+    width: 100%;
+    top: 0; /* Stay on top */
+    transition: top 0.3s; /* Transition effect when sliding down (and up) */
+    background-color: black;
+  }
+
+  nav {
+    display: flex;
+  }
+
+  h1.logo {
+    flex: 1;
+    padding-left: 50px;
+    font-size: 2em;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    text-align: center;
+  }
+
+  nav ul button {
+    background-color: black;
+    border: none;
+    cursor: pointer;
+  }
+
+  nav ul button:focus {
+    outline: none;
+  }
+
+  nav ul button li {
+    width: 150px;
+    list-style-type: none;
+    padding: 24px 0px;
+    flex: 1;
+    transition: background-color 0.4s;
+  }
+
+  nav ul button li:hover {
+    background-color: gray;
+  }
+
+  nav ul button,
+  nav ul button:visited {
+    color: white;
+    text-decoration: none;
+  }
+}
