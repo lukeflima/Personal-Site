@@ -41,7 +41,7 @@ const Index = () => {
             <meta property="og:title" content="Lucas Lima"/>
             <meta property="og:type" content="website"/>
             <meta property="og:description" content="My personal site."/>
-            <meta property="og:image"content="https://lukeflima.dev.br/favicon.ico"/>
+            <meta property="og:image"content="https://lukeflima.dev.br/lucaslima.png"/>
         </Head>
         <Navbar title={title}/>
 
