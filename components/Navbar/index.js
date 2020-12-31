@@ -36,19 +36,16 @@ const MenuAnimation = Keyframes.Spring({
   },
 });
 
+
+const scrollToView = (view) => {
+  document.getElementById(view) &&
+  document
+    .getElementById(view)
+    .scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
 const Navbar = ({ title }) => {
-  const [view, setView] = useState("landing");
   const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
-
-  console.log(MenuAnimation);
-
-  useEffect(() => {
-    view &&
-      document.getElementById(view) &&
-      document
-        .getElementById(view)
-        .scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [view]);
 
   useEffect(() => {
     document.onmouseup = (event) => {
@@ -79,7 +76,7 @@ const Navbar = ({ title }) => {
           {buttons.map((button) => {
             const { label, view } = button;
             return (
-              <button key={view} role="link" onClick={() => setView(view)}>
+              <button key={view} role="link" onClick={() => scrollToView(view)}>
                 <li>{label}</li>
               </button>
             );
@@ -102,7 +99,7 @@ const Navbar = ({ title }) => {
                     {buttons.map((button) => {
                     const { label, view } = button;
                     return (
-                        <button key={view} role="link" onClick={() => setView(view)}>
+                        <button key={view} role="link" onClick={() => scrollToView(view)}>
                         <li>{label}</li>
                         </button>
                     );

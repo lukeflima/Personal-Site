@@ -8,6 +8,7 @@ body {
 
 div.content {
     display: flex;
+    flex:3;
     height: calc(100vh - 99px);
     width: 100%;
     padding-top: 99px;
