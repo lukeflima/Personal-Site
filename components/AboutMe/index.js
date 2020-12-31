@@ -18,7 +18,7 @@ const Header = () => {
             </div>
             <div style={{ display: "flex", margin: "auto", width: "100%" }}>
                 <div style={{ flex: 1 }}></div>
-                <div id="contatos" style={{ flex: 1 }}>
+                <div id="contatos" style={{ display:"flex", flex: 1 }}>
                     <span>
                         <a href="https://www.twitter.com/lukeflima/">
                             <FontAwesomeIcon icon={faTwitterSquare}  style={{  width: "5em" }}/>

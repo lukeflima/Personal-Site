@@ -1,38 +1,119 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
-const TextTransition = typeof window !== `undefined` ? require("react-text-transition") : null
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
+import { Keyframes } from "react-spring/renderprops.cjs";
 
-export default ({ title }) => {
-    
-    const [view, setView] = useState("landing")
+const TextTransition =
+  typeof window !== `undefined` ? require("react-text-transition") : null;
 
-    useEffect(
-        () => {
-            view && 
-            document.getElementById(view) && 
-            document.getElementById(view).scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
-    , [view])
-    
-    return(
-        <div className="nav" id="navbar">
-            <nav>
-                <h1 className="logo">
-                    { TextTransition && 
-                        <TextTransition.default 
-                            text={ title }
-                            springConfig={ TextTransition.presets.wobbly }
-                        />
-                    }
-                    { !TextTransition && title }
-                </h1>
-                <ul>
-                    <button role="link" onClick={ () => setView("landing") }><li>HELLO</li></button>
-                    <button role="link" onClick={ () => setView("about-me") }><li>ABOUT ME</li></button>
-                    <button role="link" onClick={ () => setView("projects") }><li>PROJECTS</li></button>
-                </ul>
-            </nav>
+const buttons = [
+  {
+    label: "HELLO",
+    view: "landing",
+  },
+  {
+    label: "ABOUT ME",
+    view: "about-me",
+  },
+  {
+    label: "PROJECTS",
+    view: "projects",
+  },
+];
+
+const MenuAnimation = Keyframes.Spring({
+  in: async (next) => {
+    await next({
+      transform: "scaleY(1)",
+    });
+  },
+  out: async (next) => {
+    await next({
+      transform: "scaleY(0)",
+    });
+  },
+});
+
+const Navbar = ({ title }) => {
+  const [view, setView] = useState("landing");
+  const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
+
+  console.log(MenuAnimation);
+
+  useEffect(() => {
+    view &&
+      document.getElementById(view) &&
+      document
+        .getElementById(view)
+        .scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [view]);
+
+  useEffect(() => {
+    document.onmouseup = (event) => {
+      if (
+        event &&
+        !event.target.classList.contains("mobile-menu") &&
+        event.target.offsetParent &&
+        !event.target.offsetParent.classList.contains("mobile-menu")
+      ) {
+        setMobileMenuOpened(false);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="nav" id="navbar">
+      <nav>
+        <h1 className="logo">
+          {TextTransition && (
+            <TextTransition.default
+              text={title}
+              springConfig={TextTransition.presets.wobbly}
+            />
+          )}
+          {!TextTransition && title}
+        </h1>
+        <ul className="mobile-hide">
+          {buttons.map((button) => {
+            const { label, view } = button;
+            return (
+              <button key={view} role="link" onClick={() => setView(view)}>
+                <li>{label}</li>
+              </button>
+            );
+          })}
+        </ul>
+        <div
+          className="mobile hamburger"
+          onClick={() => setMobileMenuOpened(!mobileMenuOpened)}
+        >
+          <FontAwesomeIcon icon={faBars} />
         </div>
-    )
-}
+        <MenuAnimation
+          state={mobileMenuOpened ? "in" : "out"}
+          config={{ duration: 150 }}
+        >
+        {
+        props => (
+            <div style={props} className="mobile mobile-menu blackbg">
+                <ul>
+                    {buttons.map((button) => {
+                    const { label, view } = button;
+                    return (
+                        <button key={view} role="link" onClick={() => setView(view)}>
+                        <li>{label}</li>
+                        </button>
+                    );
+                    })}
+                </ul>
+            </div>
+        )}
+        </MenuAnimation>
+      </nav>
+    </div>
+  );
+};
+
+export default Navbar;

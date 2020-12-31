@@ -28,6 +28,10 @@ div.content {
     background-color: white;
 }
 
+.blackbg {
+    background-color: black;
+}
+
 .blacktxt {
     color: black;
 }
@@ -38,4 +42,18 @@ div.content {
     margin-bottom: 0;
     margin-left: 50vw;
     bottom: 0em;
+}
+
+.mobile {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-hide{
+        display: none !important;
+    }
+    
+    .mobile {
+        display: block;
+    }
 }

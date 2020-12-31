@@ -1,4 +1,4 @@
-export default () => {
+const Landing = () => {
     return (
         <div id="landing" className="content">
             <h1 className="name">Hello, I'm Lucas.</h1>
@@ -6,3 +6,5 @@ export default () => {
         </div>
     )
 }
+
+export default Landing;
