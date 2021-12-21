@@ -7,4 +7,6 @@ const Landing = () => {
     )
 }
 
+Landing.title = "Lucas"
+
 export default Landing;
