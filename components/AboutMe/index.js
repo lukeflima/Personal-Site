@@ -1,5 +1,5 @@
 import { faLinkedin, faGithubSquare, faTwitterSquare } from "@fortawesome/free-brands-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const AboutMe = () => {
     return (
@@ -9,12 +9,12 @@ const AboutMe = () => {
                 <div style={{ flex: 3, height: "100%", display: "flex", flexDirection: "column" }}>
                     <div style={{ display: "flex", margin: "auto", flex: 1 }}>
                         <h3 className="about-me">
-                            So... I'm a Computer Engineering student, who's into Web Development, likes to play CTFs and do some hardware stuff.
+                            So... I&apos;m a Computer Engineering student, who&apos;s into Web Development, likes to play CTFs and do some hardware stuff.
                         </h3>
                     </div>
                     <div style={{ display: "flex", margin: "auto", width: "100%", flex: 1, alignItems: "center", justifyContent: "center", textAlign: "center" }}>
                         <p>
-                            I got a CTF team with some friends that's called <a target="_blank" rel="noopener noreferrer" href="https://ctftime.org/team/71631">ByteForc3</a>.
+                            I got a CTF team with some friends that&apos;s called <a target="_blank" rel="noopener noreferrer" href="https://ctftime.org/team/71631">ByteForc3</a>.
                         </p>
                     </div>
                     <div style={{ display: "flex", margin: "auto", width: "100%", flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", textAlign: "center" }}>

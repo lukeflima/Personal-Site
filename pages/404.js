@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-const page404 = () =>{
+const Page404 = () => {
     const route = useRouter();
-    
-    useEffect(() => route.push("/"), []);
+
+    useEffect(() => route.push("/"));
 
     return <></>;
 }
 
-export default page404;
+export default Page404;
