@@ -77,14 +77,11 @@ const QoiViewer = () => {
             }
 
             if (width <= div_width && height <= div_height) {
-                console.log("no resize")
                 canvas.width = width
                 canvas.height = height
                 context.putImageData(imgData, 0, 0)
             } else {
-                console.log("resize")
                 if (height >= width) {
-                    console.log("resize1")
                     canvas.height = div_height
                     canvas.width = div_height * width / height
                 } else {
