@@ -2697,8 +2697,8 @@
   "resolved" "https://registry.npmjs.org/punycode/-/punycode-2.1.1.tgz"
   "version" "2.1.1"
 
-"qoi-viewer@file:public/qoi_viewer":
-  "resolved" "file:public/qoi_viewer"
+"qoi-viewer@file:qoi_viewer":
+  "resolved" "file:qoi_viewer"
   "version" "0.1.0"
 
 "querystring-es3@0.2.1":
