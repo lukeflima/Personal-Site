@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import * as wasm from 'qoi-viewer';
+import QoiViewer from '../QoiViewer';
 
 function imagedata_to_image(imagedata) {
     const canvas = document.createElement('canvas');
@@ -86,26 +87,11 @@ const Projects = () => {
     }, [image])
 
     return (
-        <div id="projects" className="content">
-            <div style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column"
-            }}>
-                <h1><label htmlFor="qoi-image" >QOI Image</label></h1>
-                <p>Select a QOIF (Quite OK Image Format) Image</p>
-                <FileUploader label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={decode} />
-                {errorMsg && <p style={{ color: "red", fontWeight: "bold" }}>{errorMsg}</p>}
-            </div>
-            <div ref={divRef} style={{
-                width: "100%", height: "100%", display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-            }}>
-                <canvas ref={canvasRef}  ></canvas>
-            </div>
-        </div >
+        <>
+            <div id="projects" className="content">
+                <QoiViewer />
+            </div >
+        </>
     )
 }
 
