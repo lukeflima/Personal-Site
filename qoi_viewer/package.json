@@ -1,0 +1,16 @@
+{
+  "name": "qoi-viewer",
+  "collaborators": [
+    "Lucas Lima <lucasflima25@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "qoi_viewer_bg.wasm",
+    "qoi_viewer.js",
+    "qoi_viewer_bg.js",
+    "qoi_viewer.d.ts"
+  ],
+  "module": "qoi_viewer.js",
+  "types": "qoi_viewer.d.ts",
+  "sideEffects": false
+}
