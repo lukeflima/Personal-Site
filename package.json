@@ -9,7 +9,7 @@
     "build": "npm run buildQoiView && next build",
     "start": "next start",
     "pregetQoiView": "amazon-linux-extras install rust1",
-    "getQoiView": "cd projects git clone https://github.com/lukeflima/qoi-viewer qoi-viewer-src",
+    "getQoiView": "cd projects && git clone https://github.com/lukeflima/qoi-viewer qoi-viewer-src",
     "prebuildQoiView": "npm run getQoiView",
     "buildQoiView": "cd projects/qoi-viewer-src && wasm-pack build && mkdir ../qoi-viewer/ && cp pkg/* ../qoi0viwer"
   },
