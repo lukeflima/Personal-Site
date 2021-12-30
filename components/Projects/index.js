@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { FileUploader } from 'react-drag-drop-files';
 import * as wasm from '../../public/qoi_viewer';
 
 function imagedata_to_image(imagedata) {
@@ -15,25 +16,33 @@ function imagedata_to_image(imagedata) {
 
 const Projects = () => {
     const [image, setImage] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
     const canvasRef = useRef(null)
     const divRef = useRef(null)
 
-    const decode = async (event) => {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function () {
+    const decode = (file) => {
 
-                const arrayBuffer = this.result,
-                    array = new Uint8Array(arrayBuffer);
+        // const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function () {
 
+            const arrayBuffer = this.result,
+                array = new Uint8Array(arrayBuffer);
+
+            const is_valid_qoif = wasm.check_if_valid_qoif(array)
+            if (is_valid_qoif) {
                 const image = wasm.decode_qoi(array, file.size);
-                console.log(image.get_bytes())
                 setImage(image);
+                setErrorMsg(null);
+            } else {
+                setErrorMsg("Invalid QOIF Image");
             }
-            reader.readAsArrayBuffer(file);
         }
+        reader.readAsArrayBuffer(file);
     }
+    useEffect(() => {
+        document.getElementsByName("qoi-image")[0].accept = ".qoi"
+    })
 
     useEffect(() => {
         if (image) {
@@ -47,10 +56,6 @@ const Projects = () => {
 
             const div_width = divRef.current.offsetWidth - 80
             const div_height = divRef.current.offsetHeight - 80
-
-            console.log(div_width, div_height)
-
-
 
             let imgData = null
             if (channels == 4) {
@@ -73,18 +78,15 @@ const Projects = () => {
                 context.putImageData(imgData, 0, 0)
             } else {
                 canvas.height = div_height
-                canvas.width = div_width * height / width
+                canvas.width = div_width * (height < width ? height / width : width / height)
                 const img = imagedata_to_image(imgData)
-                img.onload = () =>
-                    context.drawImage(img, 0, 0, width, height, 0, 0, canvas.width, canvas.height)
-
+                img.onload = () => context.drawImage(img, 0, 0, width, height, 0, 0, canvas.width, canvas.height)
             }
-
         }
     }, [image])
 
     return (
-        <div id="Projects" className="content">
+        <div id="projects" className="content">
             <div style={{
                 display: "flex",
                 alignItems: "center",
@@ -93,7 +95,8 @@ const Projects = () => {
             }}>
                 <h1><label htmlFor="qoi-image" >QOI Image</label></h1>
                 <p>Select a QOIF (Quite OK Image Format) Image</p>
-                <input name='qoi-image' type="file" multiple={false} accept=".qoi" onChange={decode} />
+                <FileUploader label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={decode} />
+                {errorMsg && <p style={{ color: "red", fontWeight: "bold" }}>{errorMsg}</p>}
             </div>
             <div ref={divRef} style={{
                 width: "100%", height: "100%", display: "flex",
