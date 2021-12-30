@@ -6,12 +6,12 @@
     "predev": "next lint",
     "dev": "next dev",
     "prebuild": "next lint",
-    "build": "npm run buildQoiView && next build",
+    "build": "npm run buildQoiViewer && next build",
     "start": "next start",
-    "pregetQoiView": "amazon-linux-extras install rust1",
-    "getQoiView": "cd projects && git clone https://github.com/lukeflima/qoi-viewer qoi-viewer-src",
-    "prebuildQoiView": "npm run getQoiView",
-    "buildQoiView": "cd projects/qoi-viewer-src && wasm-pack build && mkdir ../qoi-viewer/ && cp pkg/* ../qoi0viwer"
+    "pregetQoiViewer": "amazon-linux-extras install rust1",
+    "getQoiViewer": "git clone https://github.com/lukeflima/qoi-viewer projects/qoi-viewer-src",
+    "prebuildQoiViewer": "npm run getQoiViewer && cargo install wasm-bindgen-cli",
+    "buildQoiViewer": "cd projects/qoi-viewer-src && wasm-pack build && mkdir ../qoi-viewer/ && cp pkg/* ../qoi0viwer"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
