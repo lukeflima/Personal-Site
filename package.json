@@ -6,13 +6,15 @@
     "predev": "next lint",
     "dev": "next dev",
     "prebuild": "next lint",
-    "build": "npm run buildQoiViewer && next build",
+    "build": "npm run buildAndInstallQoiViewer && next build",
     "start": "next start",
     "installRust": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y",
     "pregetQoiViewer": "npm run installRust",
     "getQoiViewer": "rm -rf projects/qoi-viewer-src && git clone https://github.com/lukeflima/qoi-viewer projects/qoi-viewer-src",
     "prebuildQoiViewer": "npm run getQoiViewer && source $HOME/.cargo/env && cargo install wasm-pack",
-    "buildQoiViewer": "cd projects/qoi-viewer-src && source $HOME/.cargo/env && wasm-pack build && mkdir ../qoi-viewer/ && cp pkg/* ../qoi-viewer"
+    "buildQoiViewer": "cd projects/qoi-viewer-src && source $HOME/.cargo/env && wasm-pack build && mkdir ../qoi-viewer/ && cp pkg/* ../qoi-viewer",
+    "installQoiViewer": "npm install projects/qoi-viewer",
+    "buildAndInstallQoiViewer": "npm run buildQoiViewer && npm run installQoiViewer"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
