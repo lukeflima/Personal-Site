@@ -8,7 +8,8 @@
     "prebuild": "next lint",
     "build": "npm run buildQoiViewer && next build",
     "start": "next start",
-    "pregetQoiViewer": "amazon-linux-extras install rust1",
+    "installRust": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh",
+    "pregetQoiViewer": "npm run installRust",
     "getQoiViewer": "git clone https://github.com/lukeflima/qoi-viewer projects/qoi-viewer-src",
     "prebuildQoiViewer": "npm run getQoiViewer && cargo install wasm-bindgen-cli",
     "buildQoiViewer": "cd projects/qoi-viewer-src && wasm-pack build && mkdir ../qoi-viewer/ && cp pkg/* ../qoi0viwer"
