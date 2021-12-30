@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import * as wasm from 'qoi-viewer';
 
-function imagedata_to_image(imagedata) {
+const imagedata_to_image = imagedata => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = imagedata.width;
@@ -29,13 +29,17 @@ const QoiViewer = () => {
             const arrayBuffer = this.result,
                 array = new Uint8Array(arrayBuffer);
 
-            const is_valid_qoif = wasm.check_if_valid_qoif(array)
-            if (is_valid_qoif) {
-                const image = wasm.decode_qoi(array, file.size);
-                setImage(image);
-                setErrorMsg(null);
-            } else {
-                setErrorMsg("Invalid QOIF Image");
+            try {
+                const is_valid_qoif = wasm.check_if_valid_qoif(array)
+                if (is_valid_qoif) {
+                    const image = wasm.decode_qoi(array, file.size);
+                    setImage(image);
+                    setErrorMsg(null);
+                } else {
+                    setErrorMsg("Invalid QOIF Image");
+                }
+            } catch {
+                setErrorMsg("Error decoding QOIF Image");
             }
         }
         reader.readAsArrayBuffer(file);
@@ -73,12 +77,27 @@ const QoiViewer = () => {
             }
 
             if (width <= div_width && height <= div_height) {
+                console.log("no resize")
                 canvas.width = width
                 canvas.height = height
                 context.putImageData(imgData, 0, 0)
             } else {
-                canvas.height = div_height
-                canvas.width = div_width * (height < width ? height / width : width / height)
+                console.log("resize")
+                if (height >= width) {
+                    console.log("resize1")
+                    canvas.height = div_height
+                    canvas.width = div_height * width / height
+                } else {
+                    if (div_width < div_height) {
+                        canvas.width = div_width
+                        canvas.height = div_width * height / width
+                    }
+                    else {
+                        canvas.width = div_height
+                        canvas.height = div_height * height / width
+                    }
+                }
+
                 const img = imagedata_to_image(imgData)
                 img.onload = () => context.drawImage(img, 0, 0, width, height, 0, 0, canvas.width, canvas.height)
             }
