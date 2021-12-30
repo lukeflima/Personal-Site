@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
-import * as wasm from '../../public/qoi_viewer';
+import * as wasm from 'qoi-viewer';
 
 function imagedata_to_image(imagedata) {
     const canvas = document.createElement('canvas');
