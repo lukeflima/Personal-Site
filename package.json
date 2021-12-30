@@ -8,7 +8,7 @@
     "prebuild": "next lint",
     "build": "npm run buildQoiViewer && next build",
     "start": "next start",
-    "installRust": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | need_tty=no sh && source $HOME/.cargo/env",
+    "installRust": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && source $HOME/.cargo/env",
     "pregetQoiViewer": "npm run installRust",
     "getQoiViewer": "git clone https://github.com/lukeflima/qoi-viewer projects/qoi-viewer-src",
     "prebuildQoiViewer": "npm run getQoiViewer && cargo install wasm-bindgen-cli",
