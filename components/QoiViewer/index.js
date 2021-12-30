@@ -93,7 +93,7 @@ const QoiViewer = () => {
                 justifyContent: "center",
                 flexDirection: "column"
             }}>
-                <h1><label htmlFor="qoi-image" >QOI Image</label></h1>
+                <h1><label htmlFor="qoi-image" >QOI Image Viewer</label></h1>
                 <p>Select a QOIF (Quite OK Image Format) Image</p>
                 <FileUploader label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={decode} />
                 {errorMsg && <p style={{ color: "red", fontWeight: "bold" }}>{errorMsg}</p>}
