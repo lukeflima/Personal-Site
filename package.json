@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "next lint",
+    "predev": "next lint && npm run getDevQoiViewer && npm run buildDevQoiViewer",
     "dev": "next dev",
-    "prebuild": "next lint && npm run getDevQoiViewer && npm run buildDevQoiViewer",
+    "prebuild": "next lint",
     "build": "npm run buildAndInstallQoiViewer && next build",
     "start": "next start",
     "installRust": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y",
