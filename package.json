@@ -11,7 +11,7 @@
     "installRust": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y",
     "pregetQoiViewer": "npm run installRust",
     "getQoiViewer": "git clone https://github.com/lukeflima/qoi-viewer projects/qoi-viewer-src",
-    "prebuildQoiViewer": "npm run getQoiViewer && source $HOME/.cargo/env && cargo install wasm-bindgen-cli",
+    "prebuildQoiViewer": "npm run getQoiViewer && source $HOME/.cargo/env && cargo install wasm-pack",
     "buildQoiViewer": "cd projects/qoi-viewer-src && source $HOME/.cargo/env && wasm-pack build && mkdir ../qoi-viewer/ && cp pkg/* ../qoi0viwer"
   },
   "dependencies": {
