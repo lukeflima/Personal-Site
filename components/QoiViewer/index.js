@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
+import { faGithubSquare } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import * as wasm from 'qoi-viewer';
 
 const imagedata_to_image = imagedata => {
@@ -109,7 +111,19 @@ const QoiViewer = () => {
                 justifyContent: "center",
                 flexDirection: "column"
             }}>
-                <h1><label htmlFor="qoi-image" >QOI Image Viewer</label></h1>
+                <h1 style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}><label htmlFor="qoi-image">QOI Image Viewer</label>
+                    <a target="_blank" rel="noreferrer" style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }} href="https://github.com/lukeflima/qoi-viewer">
+                        <FontAwesomeIcon icon={faGithubSquare} style={{ marginLeft: "15px", width: "1em" }} />
+                    </a>
+                </h1>
                 <p>Select a QOIF (Quite OK Image Format) Image</p>
                 <FileUploader label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={decode} />
                 {errorMsg && <p style={{ color: "red", fontWeight: "bold" }}>{errorMsg}</p>}
