@@ -2,29 +2,63 @@ import { useEffect, useRef, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { SpinnerCircular } from 'spinners-react';
 import * as wasm from 'qoi-viewer';
 
-const imagedata_to_image = imagedata => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = imagedata.width;
-    canvas.height = imagedata.height;
-    ctx.putImageData(imagedata, 0, 0);
-
-    const image = new Image();
-    image.src = canvas.toDataURL();
-    return image;
-}
-
 const QoiViewer = () => {
+    const [isLoading, setLoading] = useState(false);
     const [image, setImage] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const canvasRef = useRef(null)
-    const divRef = useRef(null)
+    const imgRef = useRef(null)
 
-    const decode = (file) => {
+    useEffect(() => {
+        document.getElementsByName("qoi-image")[0].accept = ".qoi"
+    })
 
-        // const file = event.target.files[0];
+    useEffect(() => {
+        if (image === null) return;
+
+        const renderImage = async () => {
+            try {
+                const width = image.get_width()
+                const height = image.get_height()
+                const channels = image.get_channels()
+                const bytes = image.get_bytes()
+
+                let imgData = null
+                if (channels == 4) {
+                    imgData = new ImageData(new Uint8ClampedArray(bytes), width, height)
+                } else {
+                    imgData = new ImageData(width, height)
+                    let b_i = 0;
+                    for (let i = 0; i < width * height * 4; i += 4) {
+                        imgData.data[i + 0] = bytes[b_i + 0]
+                        imgData.data[i + 1] = bytes[b_i + 1]
+                        imgData.data[i + 2] = bytes[b_i + 2]
+                        imgData.data[i + 3] = 255
+                        b_i += channels
+                    }
+                }
+
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = imgData.width;
+                canvas.height = imgData.height;
+                ctx.putImageData(imgData, 0, 0);
+
+                const img = imgRef.current;
+                img.src = canvas.toDataURL();
+                img.onload = _ => setLoading(false);
+            } catch {
+                setErrorMsg("Error while rendenring the image");
+                setLoading(false);
+            }
+        }
+
+        renderImage();
+    }, [image])
+
+    const decode = async (file) => {
         const reader = new FileReader();
         reader.onload = function () {
 
@@ -46,62 +80,6 @@ const QoiViewer = () => {
         }
         reader.readAsArrayBuffer(file);
     }
-    useEffect(() => {
-        document.getElementsByName("qoi-image")[0].accept = ".qoi"
-    })
-
-    useEffect(() => {
-        if (image) {
-            const canvas = canvasRef.current
-            const context = canvas.getContext('2d')
-
-            const width = image.get_width()
-            const height = image.get_height()
-            const channels = image.get_channels()
-            const bytes = image.get_bytes()
-
-            const div_width = divRef.current.offsetWidth - 80
-            const div_height = divRef.current.offsetHeight - 80
-
-            let imgData = null
-            if (channels == 4) {
-                imgData = new ImageData(new Uint8ClampedArray(bytes), width, height)
-            } else {
-                imgData = new ImageData(width, height)
-                let b_i = 0;
-                for (let i = 0; i < width * height * 4; i += 4) {
-                    imgData.data[i + 0] = bytes[b_i + 0]
-                    imgData.data[i + 1] = bytes[b_i + 1]
-                    imgData.data[i + 2] = bytes[b_i + 2]
-                    imgData.data[i + 3] = 255
-                    b_i += channels
-                }
-            }
-
-            if (width <= div_width && height <= div_height) {
-                canvas.width = width
-                canvas.height = height
-                context.putImageData(imgData, 0, 0)
-            } else {
-                if (height >= width) {
-                    canvas.height = div_height
-                    canvas.width = div_height * width / height
-                } else {
-                    if (div_width < div_height) {
-                        canvas.width = div_width
-                        canvas.height = div_width * height / width
-                    }
-                    else {
-                        canvas.width = div_height
-                        canvas.height = div_height * height / width
-                    }
-                }
-
-                const img = imagedata_to_image(imgData)
-                img.onload = () => context.drawImage(img, 0, 0, width, height, 0, 0, canvas.width, canvas.height)
-            }
-        }
-    }, [image])
 
     return (
         <>
@@ -125,15 +103,33 @@ const QoiViewer = () => {
                     </a>
                 </h1>
                 <p>Select a QOIF (Quite OK Image Format) Image</p>
-                <FileUploader label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={decode} />
+                <FileUploader label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={f => { setLoading(true); decode(f); }} />
                 {errorMsg && <p style={{ color: "red", fontWeight: "bold" }}>{errorMsg}</p>}
             </div>
-            <div ref={divRef} style={{
-                width: "100%", height: "100%", display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+            <div style={{
+                width: "100%", height: "100%",
+                position: "relative"
             }}>
-                <canvas ref={canvasRef}  ></canvas>
+                {isLoading &&
+                    <div style={{
+                        float: "right",
+                        position: "absolute",
+                        right: "50%",
+                        top: "25%",
+                    }}>
+                        <SpinnerCircular enabled={isLoading} color="#fff" secondaryColor="#808080" size={60} />
+                    </div>
+                }
+                {image !== null &&
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img style={{
+                        maxWidth: "80%",
+                        maxHeight: "80%",
+                        margin: "auto",
+                        padding: 15,
+                        display: "block"
+                    }} ref={imgRef} alt="Image for QOI-Viewer" />
+                }
             </div>
         </>
     )
