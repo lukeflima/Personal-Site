@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { SpinnerCircular } from 'spinners-react';
 import * as wasm from 'qoi-viewer';
 
 const QoiViewer = () => {
@@ -110,16 +109,6 @@ const QoiViewer = () => {
                 width: "100%", height: "100%",
                 position: "relative"
             }}>
-                {isLoading &&
-                    <div style={{
-                        float: "right",
-                        position: "absolute",
-                        right: "50%",
-                        top: "25%",
-                    }}>
-                        <SpinnerCircular enabled={isLoading} color="#fff" secondaryColor="#808080" size={60} />
-                    </div>
-                }
                 {image !== null &&
                     // eslint-disable-next-line @next/next/no-img-element
                     <img style={{
