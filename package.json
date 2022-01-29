@@ -8,7 +8,7 @@
     "prebuild": "next lint",
     "build": "npm run installQoiViewer && next build",
     "start": "next start",
-    "getQoiViewer": "curl -L https://github.com/lukeflima/qoi-viewer/files/7964742/qoi-viewer.zip -o ./projects/qoi-viewer.zip",
+    "getQoiViewer": "mkdir ./projects && curl -L https://github.com/lukeflima/qoi-viewer/files/7964742/qoi-viewer.zip -o ./projects/qoi-viewer.zip",
     "prebuildQoiViewer": "npm run getQoiViewer",
     "buildQoiViewer": "unzip ./projects/qoi-viewer.zip -d ./projects/ && rm -v ./projects/qoi-viewer.zip",
     "preinstallQoiViewer": "npm run buildQoiViewer",
