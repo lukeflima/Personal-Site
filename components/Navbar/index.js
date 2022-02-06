@@ -30,7 +30,7 @@ const scrollToView = (view) => {
       .scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-const Navbar = ({ title }) => {
+const Navbar = ({ title, navClass }) => {
   const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
   const mobileMenuStyle = useSpring({ scaleY: mobileMenuOpened ? 1 : 0, config: { duration: 250 } })
 
@@ -49,7 +49,7 @@ const Navbar = ({ title }) => {
 
   return (
     <div className="nav" id="navbar">
-      <nav>
+      <nav className={navClass ? navClass : ""}>
         <h1 className="logo">
           {TextTransition && (
             <TextTransition.default
@@ -78,7 +78,7 @@ const Navbar = ({ title }) => {
         </div>
         <animated.div
           style={mobileMenuStyle}
-          className="mobile mobile-menu blackbg"
+          className="mobile mobile-menu primary-bg"
         >
           <ul>
             {buttons.map((button) => {
