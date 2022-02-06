@@ -1,3 +1,5 @@
+@import "../../globals.scss";
+
 #about-me {
   .content-about-me {
     margin: auto;
@@ -31,7 +33,7 @@
       transition: 0.2s;
     }
     a:hover {
-      color: grey;
+      color: $btn-hover-collor;
     }
     span {
       margin: 0 20px;

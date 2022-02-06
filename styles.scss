@@ -1,3 +1,5 @@
+@import "./globals";
+
 @keyframes spinners-react-circular {
   0% {
     stroke-dashoffset: 306;
@@ -40,11 +42,11 @@ div.content {
 }
 
 .secodary-bg {
-  background-color: rgb(39, 0, 27);
+  background-color: $secondary-color;
 }
 
 .primary-bg {
-  background-color: black;
+  background-color: $primary-color;
 }
 
 

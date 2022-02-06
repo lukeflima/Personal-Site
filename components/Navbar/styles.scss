@@ -1,15 +1,17 @@
+@import "../../globals.scss";
+
 #navbar {
   nav {
     position: fixed; /* Make it stick/fixed */
     width: 100%;
     top: 0; /* Stay on top */
     transition: top 0.3s; /* Transition effect when sliding down (and up) */
-    background: black;
+    background: $primary-color;
     &.secondary-style {
-      background: rgb(0,0,0);
-      background: -moz-linear-gradient(180deg, rgba(0,0,0,1) 69%, rgb(39, 0, 27) 100%);
-      background: -webkit-linear-gradient(180deg, rgba(0,0,0,1) 69%, rgb(39, 0, 27) 100%);
-      background: linear-gradient(180deg, rgba(0,0,0,1) 69%, rgb(39, 0, 27) 100%);
+      background: $primary-color;
+      background: -moz-linear-gradient(180deg, $primary-color 69%, $secondary-color 100%);
+      background: -webkit-linear-gradient(180deg, $primary-color 69%, $secondary-color 100%);
+      background: linear-gradient(180deg, $primary-color 69%, $secondary-color 100%);
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#52014f",GradientType=1);  
     }
   }
@@ -50,7 +52,7 @@
   }
 
   nav ul button li:hover {
-    background-color: gray;
+    background-color: $btn-hover-collor;
   }
 
   nav ul button,
