@@ -1,3 +1,5 @@
+@import "../../globals.scss";
+
 #projects {
   // max-width: 1080px;
   // max-height: calc(100vh - 99px);
@@ -10,6 +12,6 @@
     transition: 0.2s;
   }
   a:any-link:hover {
-    color: grey;
+    color: $btn-hover-collor;
   }
 }

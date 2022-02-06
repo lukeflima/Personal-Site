@@ -4,6 +4,7 @@ import Navbar from "../Navbar"
 const Layout = ({ children }) => {
     const titles = children.map(c => c.props.title);
     const [title, setTitle] = useState("Lucas")
+    // FIXME: make primary and secondary generic
     const [navClass, setNavClass] = useState(undefined)
 
     useEffect(() => {
