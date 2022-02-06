@@ -102,7 +102,7 @@ const QoiViewer = () => {
                     </a>
                 </h1>
                 <p>Select a QOIF (Quite OK Image Format) Image</p>
-                <FileUploader label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={f => { setLoading(true); decode(f); }} />
+                <FileUploader classes="drag-input" label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={f => { setLoading(true); decode(f); }} />
                 {errorMsg && <p style={{ color: "red", fontWeight: "bold" }}>{errorMsg}</p>}
             </div>
             <div style={{

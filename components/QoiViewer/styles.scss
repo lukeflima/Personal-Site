@@ -1,0 +1,10 @@
+@import "../../globals.scss";
+
+.drag-input {
+    border: dashed 2px $secondary-color-light !important;
+    svg {
+        path {
+            fill: $secondary-color-light !important;
+        }
+    }
+}
