@@ -11,7 +11,7 @@
     "preinstall": "npm run installQoiViewer",
     "getQoiViewer": "mkdir -p ./projects && curl -L https://github.com/lukeflima/qoi-viewer/files/7964742/qoi-viewer.zip -o ./projects/qoi-viewer.zip",
     "prebuildQoiViewer": "npm run getQoiViewer",
-    "buildQoiViewer": "unzip ./projects/qoi-viewer.zip -d ./projects/ && rm -v ./projects/qoi-viewer.zip",
+    "buildQoiViewer": "unzip -o ./projects/qoi-viewer.zip -d ./projects/ && rm -v ./projects/qoi-viewer.zip",
     "preinstallQoiViewer": "npm run buildQoiViewer",
     "installQoiViewer": "npm install ./projects/qoi-viewer"
   },
