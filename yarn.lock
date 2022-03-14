@@ -1755,7 +1755,7 @@
 
 "qoi-viewer@file:projects/qoi-viewer":
   "resolved" "file:projects/qoi-viewer"
-  "version" "0.1.0"
+  "version" "0.2.0"
 
 "queue-microtask@^1.2.2":
   "integrity" "sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A=="

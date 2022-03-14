@@ -5,8 +5,6 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import { useSpring, animated } from 'react-spring'
 
-const TextTransition =
-  typeof window !== `undefined` ? require("react-text-transition") : null;
 
 const buttons = [
   {
@@ -30,11 +28,20 @@ const scrollToView = (view) => {
       .scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+let TextTransition = null;
+
+const loadTextTransition = () => {
+  TextTransition =
+    typeof window !== `undefined` ? require("react-text-transition") : null;
+}
+
 const Navbar = ({ title, navClass }) => {
   const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
   const mobileMenuStyle = useSpring({ scaleY: mobileMenuOpened ? 1 : 0, config: { duration: 250 } })
 
   useEffect(() => {
+    loadTextTransition();
+
     document.onmouseup = (event) => {
       if (
         event &&
