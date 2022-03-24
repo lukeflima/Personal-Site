@@ -27,29 +27,30 @@ const QoiViewer = () => {
         reader.readAsArrayBuffer(file);
     }
 
-    const renderImage = async () => {
-        try {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = image.width;
-            canvas.height = image.height;
-            ctx.putImageData(image, 0, 0);
 
-            const img = imgRef.current;
-            img.src = canvas.toDataURL();
-            img.onload = _ => setLoading(false);
-        } catch (e) {
-            setErrorMsg("Error while rendenring the image");
-            setLoading(false);
-            console.error(e)
-        }
-    }
 
     useEffect(() => {
         document.getElementsByName("qoi-image")[0].accept = ".qoi"
     })
 
     useEffect(() => {
+        const renderImage = async () => {
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = image.width;
+                canvas.height = image.height;
+                ctx.putImageData(image, 0, 0);
+
+                const img = imgRef.current;
+                img.src = canvas.toDataURL();
+                img.onload = _ => setLoading(false);
+            } catch (e) {
+                setErrorMsg("Error while rendenring the image");
+                setLoading(false);
+                console.error(e)
+            }
+        }
         if (image !== null) renderImage();
     }, [image])
 
