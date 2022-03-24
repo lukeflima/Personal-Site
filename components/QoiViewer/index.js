@@ -15,7 +15,7 @@ const QoiViewer = () => {
         reader.onload = function () {
             const imageArray = new Uint8Array(this.result);
             try {
-                const image = wasm.decode_qoi(imageArray, file.size);
+                const image = wasm.decode_qoi(imageArray);
                 setImage(image);
                 setErrorMsg(null);
             } catch (e) {
