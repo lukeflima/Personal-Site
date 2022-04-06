@@ -14,7 +14,11 @@ const BlogPostsFeed: React.FC<Props> = ({ posts }) => {
         </div>
         <div className="blog-post-all">
             <Link href="/blog" passHref>
-                <a>Show all blog entries.</a>
+                <a>
+                    <div className="blog-post-all-action">
+                        <p>Show all blog entries.</p>
+                    </div>
+                </a>
             </Link>
         </div>
     </div>)
