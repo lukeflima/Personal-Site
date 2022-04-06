@@ -22,10 +22,7 @@ const Blog: React.FC<Props> = ({ posts }) => {
 export default Blog;
 
 export const getStaticProps: GetStaticProps = async () => {
-
     const posts = getAllPosts()
-
-    console.log(posts)
 
     return {
         props: {
