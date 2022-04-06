@@ -17,7 +17,7 @@ const buttons = [
   },
   {
     label: "BLOG",
-    view: "blog",
+    view: "blog-post-feed",
   },
 ];
 

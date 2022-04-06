@@ -12,6 +12,6 @@ const BlogPostsFeed: React.FC<Props> = ({ posts }) => {
     </div>)
 }
 
-BlogPostsFeed.displayName = "Blog"
+BlogPostsFeed.displayName = "Blog Posts"
 
 export default BlogPostsFeed;
