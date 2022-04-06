@@ -29,7 +29,7 @@ export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    const posts = getAllPosts().slice(0, 5)
+    const posts = getAllPosts().slice(0, 4)
 
     return {
         props: {

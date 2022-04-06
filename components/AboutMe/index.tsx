@@ -18,20 +18,20 @@ const AboutMe = () => {
                         </p>
                     </div>
                     <div style={{ display: "flex", margin: "auto", width: "100%", flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-                        <div id="contatos" style={{ display: "flex" }}>
+                        <div id="contatos" style={{ display: "flex", height: 100 }}>
                             <span>
                                 <a href="https://www.twitter.com/lukeflima/">
-                                    <FontAwesomeIcon icon={faTwitterSquare} style={{ width: "5em" }} />
+                                    <FontAwesomeIcon icon={faTwitterSquare} size="6x" style={{ height: "100%" }} />
                                 </a>
                             </span>
                             <span>
                                 <a href="https://github.com/lukeflima">
-                                    <FontAwesomeIcon icon={faGithubSquare} style={{ width: "5em" }} />
+                                    <FontAwesomeIcon icon={faGithubSquare} size="6x" style={{ height: "100%" }} />
                                 </a>
                             </span>
                             <span>
                                 <a href="https://www.linkedin.com/in/lukeflima/">
-                                    <FontAwesomeIcon icon={faLinkedin} style={{ width: "5em" }} />
+                                    <FontAwesomeIcon icon={faLinkedin} size="6x" style={{ height: "100%" }} />
                                 </a>
                             </span>
                         </div>

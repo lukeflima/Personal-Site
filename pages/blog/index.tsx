@@ -12,9 +12,11 @@ const Blog: React.FC<Props> = ({ posts }) => {
     return <div style={{ marginLeft: 200 }}>
         <h1>Blog Index</h1>
         {posts.map(post =>
-            <Link key={post.realSlug} href={`/blog/${post.realSlug}`} passHref>
-                <a style={{ fontWeight: "bold" }}>{post.title}</a>
-            </Link>
+            <div key={post.realSlug} style={{ paddingBottom: 10 }} >
+                <Link href={`/blog/${post.realSlug}`} passHref>
+                    <a style={{ fontWeight: "bold" }}>{post.title}</a>
+                </Link>
+            </div>
         )}
     </div>;
 }
