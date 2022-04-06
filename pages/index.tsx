@@ -27,9 +27,6 @@ const Index: React.FC<Props> = ({ posts }) => {
 export default Index;
 
 
-interface Iparams extends ParsedUrlQuery {
-    slug: string
-}
 export const getStaticProps: GetStaticProps = async () => {
 
     const posts = getAllPosts().slice(0, 5)

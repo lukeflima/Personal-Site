@@ -19,4 +19,14 @@
   a:any-link:hover {
     color: $btn-hover-collor;
   }
+
+  .blog-post-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-width: 300px;
+    border: 1px solid $secondary-color;
+    padding: 20px
+  }
 }
