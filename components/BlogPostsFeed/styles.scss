@@ -1,8 +1,12 @@
 @import "../../globals.scss";
 
-#projects {
+#blog-post-feed {
   // max-width: 1080px;
   // max-height: calc(100vh - 99px);
+  margin: auto;
+  flex-direction: column;
+  text-align: left;
+  max-width: 1080px;
 
   a:any-link,
   a:any-link:visited,
@@ -11,6 +15,7 @@
     text-decoration: none;
     transition: 0.2s;
   }
+
   a:any-link:hover {
     color: $btn-hover-collor;
   }

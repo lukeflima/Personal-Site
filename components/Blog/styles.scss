@@ -1,0 +1,19 @@
+@import "../../globals.scss";
+
+#blog {
+    margin: auto;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    max-width: 1080px;
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .excerpt {
+        font-style: italic;
+        background-color: $secondary-color;
+        padding: 15px 10px;
+    }
+}

@@ -1,8 +1,7 @@
 import { faLinkedin, faGithubSquare, faTwitterSquare } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import TitledComponentProps from "../TitledComponent";
 
-const AboutMe: React.FC<TitledComponentProps> = ({ title = "About me" }) => {
+const AboutMe = () => {
     return (
         <div id="about-me" className="content secodary-bg" >
             <div className="content-about-me" style={{ flex: 3 }}>

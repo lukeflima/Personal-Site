@@ -5,7 +5,6 @@ const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
 
     // @ts-ignore
     const titles = children.map(c => c.type.displayName);
-    console.log("titles", titles)
     const [title, setTitle] = useState<string>("Lucas")
 
     useEffect(() => {

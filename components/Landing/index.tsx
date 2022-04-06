@@ -1,5 +1,3 @@
-import TitledComponentProps from "../TitledComponent";
-
 const Landing = () => {
     return (
         <div id="landing" className="content primary-bg">

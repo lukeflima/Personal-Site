@@ -1,0 +1,19 @@
+@import "../../globals.scss";
+
+.blog-post {
+    padding: 0 20px;
+    border: 2px solid $secondary-color;
+    width: 100%;
+    max-height: 150px;
+    margin-bottom: 10px;
+}
+
+.blog-post-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+
+    &>h2 {}
+
+}

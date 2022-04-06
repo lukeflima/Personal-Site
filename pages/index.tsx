@@ -3,18 +3,40 @@
 import Layout from "../components/Layout"
 import Landing from "../components/Landing"
 import AboutMe from "../components/AboutMe"
-import Projects from "../components/Projects";
+import BlogPostsFeed from "../components/BlogPostsFeed";
+import { Post, getAllPosts, getPostBySlug } from "../lib/api";
+import { GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
+
+type Props = {
+    posts: Omit<Post, 'slug'>[];
+}
 
 
-const Index = () => {
+const Index: React.FC<Props> = ({ posts }) => {
 
     return (
         <Layout>
             <Landing />
             <AboutMe />
-            <Projects />
+            <BlogPostsFeed posts={posts} />
         </Layout>
     );
 }
 
 export default Index;
+
+
+interface Iparams extends ParsedUrlQuery {
+    slug: string
+}
+export const getStaticProps: GetStaticProps = async () => {
+
+    const posts = getAllPosts().slice(0, 5)
+
+    return {
+        props: {
+            posts
+        }
+    }
+}

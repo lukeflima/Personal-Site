@@ -69,7 +69,7 @@ const QoiViewer = () => {
 
     return (
         <div style={{
-            width: "100%", height: "80%",
+            width: "100%", height: "100vh",
             position: "relative"
         }}>
             <div style={{

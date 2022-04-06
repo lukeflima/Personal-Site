@@ -16,8 +16,8 @@ const buttons = [
     view: "about-me",
   },
   {
-    label: "PROJECTS",
-    view: "projects",
+    label: "BLOG",
+    view: "blog",
   },
 ];
 
@@ -46,7 +46,6 @@ const Navbar: React.FC<NavbarProps> = ({ title }) => {
     loadTextTransition();
 
     document.onmouseup = (event) => {
-      console.log(event.target)
       if (
         event && event.target && event.target instanceof HTMLElement &&
         !event.target.classList.contains("mobile-menu") &&
