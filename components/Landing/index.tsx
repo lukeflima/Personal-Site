@@ -1,3 +1,5 @@
+import TitledComponentProps from "../TitledComponent";
+
 const Landing = () => {
     return (
         <div id="landing" className="content primary-bg">
@@ -7,6 +9,6 @@ const Landing = () => {
     )
 }
 
-Landing.title = "Lucas"
+Landing.displayName = "Lucas"
 
 export default Landing;

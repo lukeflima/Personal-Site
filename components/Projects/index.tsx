@@ -1,4 +1,5 @@
 import QoiViewer from '../QoiViewer';
+import TitledComponentProps from '../TitledComponent';
 
 const Projects = () => {
     return (
@@ -10,6 +11,6 @@ const Projects = () => {
     )
 }
 
-Projects.title = "Projects"
+Projects.displayName = "Projects"
 
 export default Projects;

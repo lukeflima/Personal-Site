@@ -4,7 +4,9 @@ import { useEffect } from 'react';
 const Page404 = () => {
     const route = useRouter();
 
-    useEffect(() => route.push("/"));
+    useEffect(() => {
+        route.push("/")
+    });
 
     return <></>;
 }

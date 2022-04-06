@@ -21,30 +21,34 @@ const buttons = [
   },
 ];
 
-const scrollToView = (view) => {
-  document.getElementById(view) &&
-    document
-      .getElementById(view)
-      .scrollIntoView({ behavior: "smooth", block: "center" });
+const scrollToView = (view: string) => {
+  const elem = document.getElementById(view)
+  if (elem !== null)
+    elem.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-let TextTransition = null;
+let TextTransition: any = null;
 
-const loadTextTransition = () => {
+const loadTextTransition = async () => {
   TextTransition =
-    typeof window !== `undefined` ? require("react-text-transition") : null;
+    typeof window !== `undefined` ? await import("react-text-transition") : null;
 }
 
-const Navbar = ({ title, navClass }) => {
-  const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
+interface NavbarProps {
+  title: string,
+}
+
+const Navbar: React.FC<NavbarProps> = ({ title }) => {
+  const [mobileMenuOpened, setMobileMenuOpened] = useState<boolean>(false);
   const mobileMenuStyle = useSpring({ scaleY: mobileMenuOpened ? 1 : 0, config: { duration: 250 } })
 
   useEffect(() => {
     loadTextTransition();
 
     document.onmouseup = (event) => {
+      console.log(event.target)
       if (
-        event &&
+        event && event.target && event.target instanceof HTMLElement &&
         !event.target.classList.contains("mobile-menu") &&
         event.target.offsetParent &&
         !event.target.offsetParent.classList.contains("mobile-menu")
@@ -56,7 +60,7 @@ const Navbar = ({ title, navClass }) => {
 
   return (
     <div className="nav" id="navbar">
-      <nav className={navClass ? navClass : ""}>
+      <nav>
         <h1 className="logo">
           {TextTransition && (
             <TextTransition.default

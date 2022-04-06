@@ -10,9 +10,9 @@ const Index = () => {
 
     return (
         <Layout>
-            <Landing title={Landing.title} />
-            <AboutMe title={AboutMe.title} />
-            <Projects title={Projects.title} />
+            <Landing />
+            <AboutMe />
+            <Projects />
         </Layout>
     );
 }

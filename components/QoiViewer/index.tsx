@@ -3,17 +3,21 @@ import { FileUploader } from 'react-drag-drop-files';
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import * as wasm from 'qoi-viewer';
+import { read } from 'fs';
 
 const QoiViewer = () => {
-    const [_isLoading, setLoading] = useState(false);
-    const [image, setImage] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
-    const imgRef = useRef(null);
+    const [_isLoading, setLoading] = useState<boolean>(false);
+    const [image, setImage] = useState<ImageData | null>(null);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const imgRef = useRef<HTMLImageElement | null>(null);
 
-    const decode = async (file) => {
+    const decode = async (file: File) => {
         const reader = new FileReader();
         reader.onload = function () {
-            const imageArray = new Uint8Array(this.result);
+            if (!(reader.result instanceof ArrayBuffer)) {
+                throw new Error(`Expected e to be an ArrayBuffer, was ${reader && reader.constructor && reader.constructor.name || reader}`);
+            }
+            const imageArray = new Uint8Array(reader.result);
             try {
                 const image = wasm.decode_qoi(imageArray);
                 setImage(image);
@@ -30,28 +34,35 @@ const QoiViewer = () => {
 
 
     useEffect(() => {
-        document.getElementsByName("qoi-image")[0].accept = ".qoi"
+        const inputImage = document.getElementsByName("qoi-image")[0]
+        if (!(inputImage instanceof HTMLInputElement))
+            throw new Error(`Expected e to be an HTMLInputElement, was ${inputImage && inputImage.constructor && inputImage.constructor.name || inputImage}`);
+        inputImage.accept = ".qoi"
     })
 
     useEffect(() => {
         const renderImage = async () => {
-            try {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = image.width;
-                canvas.height = image.height;
-                ctx.putImageData(image, 0, 0);
+            if (image !== null) {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    if (ctx === null) throw Error("No canvas context");
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    ctx.putImageData(image, 0, 0);
 
-                const img = imgRef.current;
-                img.src = canvas.toDataURL();
-                img.onload = _ => setLoading(false);
-            } catch (e) {
-                setErrorMsg("Error while rendenring the image");
-                setLoading(false);
-                console.error(e)
+                    const img = imgRef.current;
+                    if (img === null) throw Error("No image ref");
+                    img.src = canvas.toDataURL();
+                    img.onload = _ => setLoading(false);
+                } catch (e) {
+                    setErrorMsg("Error while rendenring the image");
+                    setLoading(false);
+                    console.error(e)
+                }
             }
         }
-        if (image !== null) renderImage();
+        renderImage();
     }, [image])
 
 
@@ -81,7 +92,7 @@ const QoiViewer = () => {
                     </a>
                 </h1>
                 <p>Select a QOIF (Quite OK Image Format) Image</p>
-                <FileUploader classes="drag-input" label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={f => { setLoading(true); decode(f); }} />
+                <FileUploader classes="drag-input" label="Upload or drop a QOIF Image here" id='qoi-image' name='qoi-image' handleChange={(f: File) => { setLoading(true); decode(f); }} />
                 {errorMsg && <p style={{ color: "red", fontWeight: "bold" }}>{errorMsg}</p>}
             </div>
 
